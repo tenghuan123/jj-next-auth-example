@@ -1,6 +1,6 @@
 "use client";
 
-import { registerAction } from "./action";
+import { registerAction } from "@/auth/actions";
 
 
 export default function RegisterPage() {

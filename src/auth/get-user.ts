@@ -16,5 +16,13 @@ export async function getUser() {
       where: { id: (payload as JwtUser).id },
     });
 
-    return user;
+    if(!user) {
+        return null;
+    }
+
+    return {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+    };
 }
