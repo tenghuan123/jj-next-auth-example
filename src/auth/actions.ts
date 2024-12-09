@@ -100,7 +100,7 @@ export async function logoutAction() {
 export async function refreshTokenAction(refreshToken: string) {
     try {
         // 验证 Refresh Token
-        const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET as string) as JwtUser;
+        const decoded = jwt.verify(refreshToken, process.env.JWT_SECRET as string) as JwtUser;
 
         // 删除过期的 Refresh Token
         await prisma.refreshToken.deleteMany({
@@ -131,6 +131,7 @@ export async function refreshTokenAction(refreshToken: string) {
     
         return { accessToken: newAccessToken };
       } catch (error) {
+        console.log(error);
         return { error: "Invalid or expired refresh token" };
       }
 }

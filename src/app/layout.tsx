@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { ErrorBoundary } from "react-error-boundary";
+import { Suspense } from "react";
+import IntervalRefreshToken from "@/auth/interval-refresh-token";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,6 +32,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+
+        <ErrorBoundary fallback={null}>
+            <Suspense fallback={null}>
+                <IntervalRefreshToken />
+            </Suspense>
+        </ErrorBoundary>
       </body>
     </html>
   );
