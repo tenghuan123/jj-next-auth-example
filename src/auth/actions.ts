@@ -101,11 +101,6 @@ export async function refreshTokenAction(refreshToken: string) {
     try {
         // 验证 Refresh Token
         const decoded = jwt.verify(refreshToken, process.env.JWT_SECRET as string) as JwtUser;
-
-        // 删除过期的 Refresh Token
-        await prisma.refreshToken.deleteMany({
-          where: { expiresAt: { lt: new Date() } },
-        });
     
         // 查询数据库确保 Refresh Token 有效
         const storedToken = await prisma.refreshToken.findUnique({

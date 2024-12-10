@@ -4,6 +4,7 @@ import "./globals.css";
 import { ErrorBoundary } from "react-error-boundary";
 import { Suspense } from "react";
 import IntervalRefreshToken from "@/auth/interval-refresh-token";
+import '@/task/clear-refresh-token'
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
