@@ -14,7 +14,9 @@ cron.schedule("0 1 * * *", async () => {
       },
     });
 
-    console.log(`Cleanup job completed. Deleted ${result.count} expired tokens.`);
+    console.log(
+      `Cleanup job completed. Deleted ${result.count} expired tokens.`,
+    );
   } catch (error) {
     console.error("Error during token cleanup job:", error);
   }

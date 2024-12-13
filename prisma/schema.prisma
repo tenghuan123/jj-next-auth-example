@@ -21,6 +21,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   RefreshToken RefreshToken[]
+  UserRoles   UserRole[]      // 关系：一个用户可以拥有多个角色
 }
 
 model RefreshToken {
@@ -30,4 +31,41 @@ model RefreshToken {
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   expiresAt DateTime
+}
+
+
+model Role {
+  id          Int          @id @default(autoincrement())
+  name        String        @unique
+  description String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  RolePermissions RolePermission[]  // 关系：一个角色可以拥有多个权限
+  UserRoles   UserRole[]    // 关系：一个角色可以分配给多个用户
+}
+
+model Permission {
+  id          Int          @id @default(autoincrement())
+  resource    String        // 资源名，例如 `/dashboard`
+  action      String        // 操作类型，例如 `read`、`write`
+  description String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  RolePermissions RolePermission[]  // 关系：一个权限可以分配给多个角色
+}
+
+model RolePermission {
+  id          Int          @id @default(autoincrement())
+  roleId      Int
+  permissionId Int
+  role        Role         @relation(fields: [roleId], references: [id])
+  permission  Permission   @relation(fields: [permissionId], references: [id])
+}
+
+model UserRole {
+  id          Int          @id @default(autoincrement())
+  userId      String
+  roleId      Int
+  user        User         @relation(fields: [userId], references: [id])
+  role        Role         @relation(fields: [roleId], references: [id])
 }

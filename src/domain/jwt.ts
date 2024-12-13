@@ -1,3 +1,3 @@
 export type JwtUser = {
-    id: string;
-}
+  id: string;
+};

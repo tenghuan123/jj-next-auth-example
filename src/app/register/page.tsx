@@ -1,7 +1,6 @@
 "use client";
 
-import { registerAction } from "@/auth/actions";
-
+import { registerAction } from "@/components/auth/actions";
 
 export default function RegisterPage() {
   return (
@@ -10,16 +9,33 @@ export default function RegisterPage() {
       <form
         className="flex flex-col items-center justify-center space-y-5"
         onSubmit={async (ev) => {
-            ev.preventDefault();
-            const formData = new FormData(ev.currentTarget);
-            const result = await registerAction(formData);
-            console.log(result);
+          ev.preventDefault();
+          const formData = new FormData(ev.currentTarget);
+          const result = await registerAction(formData);
+          console.log(result);
         }}
       >
-        <input className="border border-gray-300 rounded-md p-2 text-neutral-700" type="text" name="username" placeholder="Username" />
-        <input className="border border-gray-300 rounded-md p-2 text-neutral-700" type="password" name="password" placeholder="Password" />
-        <input className="border border-gray-300 rounded-md p-2 text-neutral-700" type="email" name="email" placeholder="Email" />
-        <button className="bg-blue-500 text-white p-2 rounded-md" type="submit">Register</button>
+        <input
+          className="border border-gray-300 rounded-md p-2 text-neutral-700"
+          type="text"
+          name="username"
+          placeholder="Username"
+        />
+        <input
+          className="border border-gray-300 rounded-md p-2 text-neutral-700"
+          type="password"
+          name="password"
+          placeholder="Password"
+        />
+        <input
+          className="border border-gray-300 rounded-md p-2 text-neutral-700"
+          type="email"
+          name="email"
+          placeholder="Email"
+        />
+        <button className="bg-blue-500 text-white p-2 rounded-md" type="submit">
+          Register
+        </button>
       </form>
     </div>
   );
